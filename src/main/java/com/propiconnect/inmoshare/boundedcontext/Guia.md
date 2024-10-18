@@ -1,0 +1,2 @@
+## OJO
+Este es un placeholder, cada uno debe crear su carpeta con bounded context, y luego crear subcarpetas como domain application interfaces etc ya se la saben, trabajaremos en ramas separadas por bounded context, y luego haremos merge a master, para que no haya conflictos.
