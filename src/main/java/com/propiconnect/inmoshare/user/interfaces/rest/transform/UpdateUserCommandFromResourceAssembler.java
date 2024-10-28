@@ -4,9 +4,9 @@ import com.propiconnect.inmoshare.user.domain.model.commands.UpdateUserCommand;
 import com.propiconnect.inmoshare.user.interfaces.rest.resources.CreateUserResource;
 
 public class UpdateUserCommandFromResourceAssembler {
-    public static UpdateUserCommand toCommand(Long userId, CreateUserResource resource) {
+    public static UpdateUserCommand toCommand(Long id, CreateUserResource resource) {
         return new UpdateUserCommand(
-                userId,
+                id,
                 resource.name(),
                 resource.username(),
                 resource.password(),

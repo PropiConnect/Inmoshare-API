@@ -2,7 +2,7 @@ package com.propiconnect.inmoshare.user.interfaces.rest;
 
 import com.propiconnect.inmoshare.user.domain.model.aggregates.User;
 import com.propiconnect.inmoshare.user.domain.model.commands.UpdateUserCommand;
-import com.propiconnect.inmoshare.user.domain.model.queries.GetUserByUserIdQuery;
+import com.propiconnect.inmoshare.user.domain.model.queries.GetUserByIdQuery;
 import com.propiconnect.inmoshare.user.domain.services.UserCommandService;
 import com.propiconnect.inmoshare.user.domain.services.UserQueryService;
 import com.propiconnect.inmoshare.user.interfaces.rest.resources.CreateUserResource;
@@ -42,7 +42,7 @@ public class UserController {
 
     @GetMapping("{userId}")
     public ResponseEntity<UserResource> getUser(@PathVariable Long userId) {
-        Optional<User> user = userQueryService.handle(new GetUserByUserIdQuery(userId));
+        Optional<User> user = userQueryService.handle(new GetUserByIdQuery(userId));
         return user.map(source -> ResponseEntity.ok(UserResourceFromEntityAssembler.toUserResource(source)))
                 .orElseGet(()->ResponseEntity.notFound().build());
     }
@@ -70,7 +70,7 @@ public class UserController {
 
     @DeleteMapping("{userId}")
     public ResponseEntity<Void> deleteUser(@PathVariable Long userId) {
-        Optional<User> user = userQueryService.handle(new GetUserByUserIdQuery(userId));
+        Optional<User> user = userQueryService.handle(new GetUserByIdQuery(userId));
         if (user.isPresent()) {
             userCommandService.deleteById(userId);
             return ResponseEntity.noContent().build();

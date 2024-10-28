@@ -1,6 +1,7 @@
 package com.propiconnect.inmoshare.user.domain.model.aggregates;
 
 
+import com.propiconnect.inmoshare.shared.domain.model.aggregates.AuditableAbstractAggregateRoot;
 import com.propiconnect.inmoshare.user.domain.model.commands.CreateUserCommand;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -11,13 +12,13 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-public class User extends AbstractAggregateRoot<User> {
+public class User extends AuditableAbstractAggregateRoot<User> {
 
-    @Id
+   /* @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter
     private Long userId;
-
+*/
     @Column
     @Getter
     @Setter

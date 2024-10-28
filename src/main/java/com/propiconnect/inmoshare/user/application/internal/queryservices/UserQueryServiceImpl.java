@@ -1,7 +1,7 @@
 package com.propiconnect.inmoshare.user.application.internal.queryservices;
 
 import com.propiconnect.inmoshare.user.domain.model.aggregates.User;
-import com.propiconnect.inmoshare.user.domain.model.queries.GetUserByUserIdQuery;
+import com.propiconnect.inmoshare.user.domain.model.queries.GetUserByIdQuery;
 import com.propiconnect.inmoshare.user.domain.services.UserQueryService;
 import com.propiconnect.inmoshare.user.infrastructure.persistence.jpa.UserRepository;
 import org.springframework.stereotype.Service;
@@ -18,8 +18,8 @@ public class UserQueryServiceImpl implements UserQueryService {
     }
 
     @Override
-    public Optional<User> handle(GetUserByUserIdQuery query) {
-        return userRepository.findById(query.userId());
+    public Optional<User> handle(GetUserByIdQuery query) {
+        return userRepository.findById(query.id());
     }
 
 }

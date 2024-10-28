@@ -9,5 +9,5 @@ import java.util.Optional;
 public interface UserCommandService {
     Optional<User> handle(CreateUserCommand command);
     Optional<User> update(UpdateUserCommand command);
-    void deleteById(Long userId);
+    void deleteById(Long id);
 }
