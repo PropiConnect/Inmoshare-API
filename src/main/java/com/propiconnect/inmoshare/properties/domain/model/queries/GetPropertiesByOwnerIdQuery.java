@@ -1,4 +1,6 @@
 package com.propiconnect.inmoshare.properties.domain.model.queries;
 
-public record GetPropertiesByOwnerIdQuery() {
+import com.propiconnect.inmoshare.properties.domain.model.valueobjects.OwnerId;
+
+public record GetPropertiesByOwnerIdQuery(OwnerId ownerId) {
 }
