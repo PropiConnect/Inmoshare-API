@@ -16,7 +16,7 @@ public class Property extends AuditableAbstractAggregateRoot<Property> {
 
     @Column(nullable = false)
     @Getter
-    private long ownerId;
+    private Long ownerId;
 
     @Column(nullable = false)
     @Getter
@@ -49,11 +49,11 @@ public class Property extends AuditableAbstractAggregateRoot<Property> {
 
     @Column(nullable = false)
     @Getter
-    private long initialPrice;
+    private Double initialPrice;
 
     protected Property(){
         this.ownerName= Strings.EMPTY;
-        this.ownerId=0;
+        this.ownerId=0L;
         this.city=Strings.EMPTY;
         this.type=Strings.EMPTY;
         this.address=Strings.EMPTY;
@@ -61,7 +61,7 @@ public class Property extends AuditableAbstractAggregateRoot<Property> {
         this.propertyType=Strings.EMPTY;
         this.rentalType=Strings.EMPTY;
         this.image=Strings.EMPTY;
-        this.initialPrice=0;
+        this.initialPrice=0.0;
 
     }
 
