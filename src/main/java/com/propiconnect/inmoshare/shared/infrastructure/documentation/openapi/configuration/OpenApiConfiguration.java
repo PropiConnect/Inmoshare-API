@@ -10,19 +10,19 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class OpenApiConfiguration {
     @Bean
-    public OpenAPI learningPlatformOpenApi() {
+    public OpenAPI InmoShareOpenApi() {
         // General configuration
         var openApi = new OpenAPI();
         openApi
                 .info(new Info()
-                        .title("ACME Learning Platform API")
-                        .description("ACME Learning Platform application REST API documentation.")
+                        .title("PropiConnect InmoShare API")
+                        .description("PropiConnect InmoShare application REST API documentation.")
                         .version("v1.0.0")
                         .license(new License().name("Apache 2.0")
                                 .url("https://www.apache.org/licenses/LICENSE-2.0.html")))
                 .externalDocs(new ExternalDocumentation()
-                        .description("ACME Learning Platform Wiki Documentation")
-                        .url("https://acme-learning-platform.wiki.github.io/docs"));
+                        .description("PropiConnect InmoShare Wiki Documentation")
+                        .url("https://github.com/PropiConnect/Documentation"));
         return openApi;
     }
 }
