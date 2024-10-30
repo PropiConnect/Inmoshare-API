@@ -1,6 +1,9 @@
 package com.propiconnect.inmoshare.properties.domain.model.queries;
 
-import com.propiconnect.inmoshare.properties.domain.model.valueobjects.OwnerId;
+public record GetPropertiesByOwnerIdQuery(Long ownerId) {
+    public GetPropertiesByOwnerIdQuery{
+        if(ownerId == null || ownerId <= 0)
+            throw new IllegalArgumentException("ownerId cannot be null or zero");
 
-public record GetPropertiesByOwnerIdQuery(OwnerId ownerId) {
+    }
 }
