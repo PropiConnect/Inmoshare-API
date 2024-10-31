@@ -1,7 +1,7 @@
 package com.propiconnect.inmoshare.properties.domain.model.valueobjects;
 
-public record OwnerId(Long id) {
-    public OwnerId {
+public record PropertyId(Long id) {
+    public PropertyId {
         if (id == null || id <= 0) {
             throw new IllegalArgumentException("Property ID cannot be null or empty.");
         }
