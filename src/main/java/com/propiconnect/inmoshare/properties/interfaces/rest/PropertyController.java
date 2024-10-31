@@ -3,6 +3,7 @@ package com.propiconnect.inmoshare.properties.interfaces.rest;
 
 import com.propiconnect.inmoshare.properties.domain.model.aggregates.Property;
 
+import com.propiconnect.inmoshare.properties.domain.model.commands.DeletePropertyCommand;
 import com.propiconnect.inmoshare.properties.domain.model.queries.GetPropertyByIdQuery;
 import com.propiconnect.inmoshare.properties.domain.services.PropertyCommandService;
 import com.propiconnect.inmoshare.properties.domain.services.PropertyQueryService;
@@ -52,14 +53,11 @@ public class PropertyController {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    /*
-    @GetMapping
-    public ResponseEntity<?> getPropertiesWithParameters(@Parameter(name= "params", hidden = true)
-                                                              @RequestParam Map<String, String> params) {
-        if(params.containsKey("ownerId") && params.containsKey("")) {
+   @DeleteMapping({"{id}"})
+    public ResponseEntity<?> deleteProperty(@PathVariable Long id) {
+        var deletePropertyCommand = new DeletePropertyCommand(id);
+        propertyCommandService.handle(deletePropertyCommand);
+        return ResponseEntity.ok("Property with given id successfully deleted");
 
-    }
-
-
-     */
+   }
 }
