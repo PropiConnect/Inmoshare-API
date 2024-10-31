@@ -18,8 +18,8 @@ public class PropertyCommandServiceImpl implements PropertyCommandService {
 
     @Override
     public Optional<Property> handle(CreatePropertyCommand command) {
-        if(propertyRepository.existsByOwnerIdAndOwnerName(command.ownerId(), command.ownerName()))
-            throw new IllegalArgumentException("Property with same owner ID and owner name already exists");
+        if(propertyRepository.existsByOwnerIdAndAddress(command.ownerId(), command.address()))
+            throw new IllegalArgumentException("Property with same address already exists");
         var property = new Property(command);
         var createdProperty = propertyRepository.save(property);
         return Optional.of(createdProperty);
