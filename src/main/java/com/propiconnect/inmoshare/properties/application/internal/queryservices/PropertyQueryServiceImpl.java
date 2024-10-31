@@ -1,6 +1,7 @@
 package com.propiconnect.inmoshare.properties.application.internal.queryservices;
 
 import com.propiconnect.inmoshare.properties.domain.model.aggregates.Property;
+import com.propiconnect.inmoshare.properties.domain.model.queries.GetAllPropertiesQuery;
 import com.propiconnect.inmoshare.properties.domain.model.queries.GetPropertiesByOwnerIdQuery;
 import com.propiconnect.inmoshare.properties.domain.model.queries.GetPropertyByIdQuery;
 import com.propiconnect.inmoshare.properties.domain.services.PropertyQueryService;
@@ -26,6 +27,11 @@ public class PropertyQueryServiceImpl implements PropertyQueryService {
     @Override
     public Optional<Property> handle(GetPropertyByIdQuery query) {
         return propertyRepository.findById(query.id());
+    }
+
+    @Override
+    public List<Property> handle(GetAllPropertiesQuery query) {
+        return propertyRepository.findAll();
     }
 
 

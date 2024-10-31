@@ -4,6 +4,7 @@ package com.propiconnect.inmoshare.properties.interfaces.rest;
 import com.propiconnect.inmoshare.properties.domain.model.aggregates.Property;
 
 import com.propiconnect.inmoshare.properties.domain.model.commands.DeletePropertyCommand;
+import com.propiconnect.inmoshare.properties.domain.model.queries.GetAllPropertiesQuery;
 import com.propiconnect.inmoshare.properties.domain.model.queries.GetPropertyByIdQuery;
 import com.propiconnect.inmoshare.properties.domain.services.PropertyCommandService;
 import com.propiconnect.inmoshare.properties.domain.services.PropertyQueryService;
@@ -16,6 +17,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -46,12 +48,25 @@ public class PropertyController {
                 .orElseGet(() -> ResponseEntity.badRequest().build());
     }
 
+
     @GetMapping("/{id}")
     public ResponseEntity<PropertyResource> getPropertyById(@PathVariable Long id) {
         Optional<Property> property = propertyQueryService.handle((new GetPropertyByIdQuery(id)));
         return property.map(p -> ResponseEntity.ok(PropertyResourceFromEntityAssembler.toResourceFromEntity(p)))
                 .orElseGet(() -> ResponseEntity.notFound().build());
+
     }
+
+    @GetMapping
+    public ResponseEntity<List<PropertyResource>>getAllProperties(){
+        var getAllPropertiesQuery = new GetAllPropertiesQuery();
+        var properties = propertyQueryService.handle(getAllPropertiesQuery);
+        var propertyResources = properties.stream().map(PropertyResourceFromEntityAssembler::toResourceFromEntity).toList();
+        return ResponseEntity.ok(propertyResources);
+
+    }
+
+
 
    @DeleteMapping({"{id}"})
     public ResponseEntity<?> deleteProperty(@PathVariable Long id) {
