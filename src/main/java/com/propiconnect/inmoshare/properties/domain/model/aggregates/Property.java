@@ -2,13 +2,16 @@ package com.propiconnect.inmoshare.properties.domain.model.aggregates;
 
 import com.propiconnect.inmoshare.properties.domain.model.commands.CreatePropertyCommand;
 import com.propiconnect.inmoshare.shared.domain.model.aggregates.AuditableAbstractAggregateRoot;
-import jakarta.persistence.Column;
+import jakarta.persistence.*;
 import lombok.Getter;
 import org.apache.logging.log4j.util.Strings;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import java.util.Date;
+
+@Getter
+@Entity
 public class Property extends AuditableAbstractAggregateRoot<Property> {
-//String ownerName,long ownerId,String city,String type, String address, String description,
-// String propertyType, String rentalType, String imageUrl, long initialPrice
 
     @Column(nullable = false)
     @Getter
@@ -62,10 +65,10 @@ public class Property extends AuditableAbstractAggregateRoot<Property> {
         this.rentalType=Strings.EMPTY;
         this.image=Strings.EMPTY;
         this.initialPrice=0.0;
-
     }
 
     public Property(CreatePropertyCommand command){
+        this();
         this.ownerName=command.ownerName();
         this.ownerId=command.ownerId();
         this.city=command.city();
