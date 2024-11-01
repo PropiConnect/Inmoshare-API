@@ -16,4 +16,5 @@ public interface PropertyRepository  extends JpaRepository<Property, Long > {
     */
     Optional<Property> findByOwnerIdAndAddress(Long ownerId, String address);
     boolean existsByOwnerIdAndAddress(Long id,String address);
+    boolean existsByIdAndAddressIsNot(Long id,String address);
 }
