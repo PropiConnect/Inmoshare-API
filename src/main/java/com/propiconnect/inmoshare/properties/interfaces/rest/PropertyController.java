@@ -10,9 +10,11 @@ import com.propiconnect.inmoshare.properties.domain.services.PropertyCommandServ
 import com.propiconnect.inmoshare.properties.domain.services.PropertyQueryService;
 import com.propiconnect.inmoshare.properties.interfaces.rest.resources.CreatePropertyResource;
 import com.propiconnect.inmoshare.properties.interfaces.rest.resources.PropertyResource;
+import com.propiconnect.inmoshare.properties.interfaces.rest.resources.UpdatePropertyResource;
 import com.propiconnect.inmoshare.properties.interfaces.rest.transform.CreatePropertyCommandFromResourceAssembler;
 import com.propiconnect.inmoshare.properties.interfaces.rest.transform.PropertyResourceFromEntityAssembler;
 
+import com.propiconnect.inmoshare.properties.interfaces.rest.transform.UpdatePropertyCommandFromResourceAssembler;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -64,6 +66,17 @@ public class PropertyController {
         var propertyResources = properties.stream().map(PropertyResourceFromEntityAssembler::toResourceFromEntity).toList();
         return ResponseEntity.ok(propertyResources);
 
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<PropertyResource> updateProperty(@PathVariable Long id, @RequestBody UpdatePropertyResource updatePropertyResource) {
+        var updatePropertyCommand = UpdatePropertyCommandFromResourceAssembler.toCommandFromResource(id, updatePropertyResource);
+        var updatedProperty = propertyCommandService.handle(updatePropertyCommand);
+        if (updatedProperty.isEmpty()) {
+            return ResponseEntity.badRequest().build();
+        }
+        var propertyResource = PropertyResourceFromEntityAssembler.toResourceFromEntity(updatedProperty.get());
+        return ResponseEntity.ok(propertyResource);
     }
 
 
