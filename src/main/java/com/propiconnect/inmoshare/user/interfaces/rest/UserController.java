@@ -17,7 +17,7 @@ import java.util.Optional;
 import static org.springframework.http.HttpStatus.CREATED;
 
 @RestController
-@RequestMapping("/api/inmoshare/user")
+@RequestMapping("/api/v1/users")
 public class UserController {
 
     private final UserQueryService userQueryService;
