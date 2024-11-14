@@ -8,8 +8,10 @@ public class UserResourceFromEntityAssembler {
         return new UserResource(
                 entity.getName(),
                 entity.getUsername(),
+                entity.getPhone(),
+                entity.getEmail(),
                 entity.getPassword(),
-                entity.getSuscription(),
+                entity.getAddress(),
                 entity.getUserType()
         );
     }

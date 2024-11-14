@@ -2,12 +2,6 @@ package com.propiconnect.inmoshare.user.interfaces.rest.resources;
 
 import com.propiconnect.inmoshare.user.domain.model.enums.UserType;
 
-public record UserResource(
-        String name,
-        String username,
-        String phone,
-        String email,
-        String password,
-        String address,
+public record UpdateUserTypeResource(
         UserType userType
 ) {}

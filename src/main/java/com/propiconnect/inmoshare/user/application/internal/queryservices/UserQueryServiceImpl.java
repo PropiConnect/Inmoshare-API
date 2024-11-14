@@ -1,6 +1,7 @@
 package com.propiconnect.inmoshare.user.application.internal.queryservices;
 
 import com.propiconnect.inmoshare.user.domain.model.aggregates.User;
+import com.propiconnect.inmoshare.user.domain.model.queries.GetUserByEmailAndPasswordQuery;
 import com.propiconnect.inmoshare.user.domain.model.queries.GetUserByIdQuery;
 import com.propiconnect.inmoshare.user.domain.services.UserQueryService;
 import com.propiconnect.inmoshare.user.infrastructure.persistence.jpa.UserRepository;
@@ -22,4 +23,9 @@ public class UserQueryServiceImpl implements UserQueryService {
         return userRepository.findById(query.id());
     }
 
+    @Override
+    public Optional<User> handle(GetUserByEmailAndPasswordQuery query) {
+        return userRepository.findByEmail(query.email())
+                .filter(user -> user.getPassword().equals(query.password())); // Asegúrate de usar hashing
+    }
 }

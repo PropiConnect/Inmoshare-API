@@ -8,9 +8,10 @@ public class CreateUserCommandFromResourceAssembler {
         return new CreateUserCommand(
                 resource.name(),
                 resource.username(),
+                resource.phone(),
+                resource.email(),
                 resource.password(),
-                resource.subscription(),
-                resource.userType()
+                resource.address()
         );
     }
 }
