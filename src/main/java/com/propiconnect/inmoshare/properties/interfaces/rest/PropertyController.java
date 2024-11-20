@@ -5,6 +5,7 @@ import com.propiconnect.inmoshare.properties.domain.model.aggregates.Property;
 
 import com.propiconnect.inmoshare.properties.domain.model.commands.DeletePropertyCommand;
 import com.propiconnect.inmoshare.properties.domain.model.queries.GetAllPropertiesQuery;
+import com.propiconnect.inmoshare.properties.domain.model.queries.GetPropertiesByOwnerIdQuery;
 import com.propiconnect.inmoshare.properties.domain.model.queries.GetPropertyByIdQuery;
 import com.propiconnect.inmoshare.properties.domain.services.PropertyCommandService;
 import com.propiconnect.inmoshare.properties.domain.services.PropertyQueryService;
@@ -20,7 +21,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 //Owo
 
@@ -58,6 +58,14 @@ public class PropertyController {
         return property.map(p -> ResponseEntity.ok(PropertyResourceFromEntityAssembler.toResourceFromEntity(p)))
                 .orElseGet(() -> ResponseEntity.notFound().build());
 
+    }
+    @GetMapping("/owner/{ownerId}")
+    public ResponseEntity<List<PropertyResource>> getPropertyByOwnerId(@PathVariable Long ownerId){
+        List<Property> properties = propertyQueryService.handle(new GetPropertiesByOwnerIdQuery(ownerId));
+        List<PropertyResource> propertyResources = properties.stream()
+                .map(PropertyResourceFromEntityAssembler::toResourceFromEntity)
+                .toList();
+        return ResponseEntity.ok(propertyResources);
     }
 
     @GetMapping
