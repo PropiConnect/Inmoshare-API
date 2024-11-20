@@ -5,7 +5,7 @@ import com.propiconnect.inmoshare.properties.interfaces.rest.resources.PropertyR
 
 public class PropertyResourceFromEntityAssembler {
     public static PropertyResource toResourceFromEntity(Property entity) {
-        return new PropertyResource(entity.getOwnerName(), entity.getOwnerId(), entity.getCity(), entity.getType(), entity.getAddress(), entity.getDescription(), entity.getPropertyType(), entity.getRentalType(), entity.getImage(), entity.getInitialPrice()
+        return new PropertyResource(entity.getId(),entity.getOwnerName(), entity.getOwnerId(), entity.getCity(), entity.getType(), entity.getAddress(), entity.getDescription(), entity.getPropertyType(), entity.getRentalType(), entity.getImage(), entity.getInitialPrice()
         );
     }
 }
