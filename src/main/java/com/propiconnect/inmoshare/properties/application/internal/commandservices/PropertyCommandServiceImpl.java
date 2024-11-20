@@ -29,13 +29,13 @@ public class PropertyCommandServiceImpl implements PropertyCommandService {
 
     @Override
     public Optional<Property> handle(UpdatePropertyCommand command) {
-        if (propertyRepository.existsByIdAndAddressIsNot(command.id(), command.address()))
+        if (propertyRepository.existsByIdAndAddressIsNot(command.ownerId(), command.address()))
             throw new IllegalArgumentException("Property with the same address already exists");
         var result = propertyRepository.findById(command.id());
         if (result.isEmpty()) throw new IllegalArgumentException(("Property does not exist"));
         var propertyToUpdate = result.get();
         try {
-            var updatedProperty = propertyRepository.save(propertyToUpdate.updateInformation(command.city(), command.type(), command.address(), command.description(), command.propertyType(), command.rentalType(), command.image(), command.initialPrice()
+            var updatedProperty = propertyRepository.save(propertyToUpdate.updateInformation(command.ownerId(),command.ownerName(), command.city(), command.type(), command.address(), command.description(), command.propertyType(), command.rentalType(), command.image(), command.initialPrice()
             ));
             return Optional.of(updatedProperty);
         }catch (Exception e){

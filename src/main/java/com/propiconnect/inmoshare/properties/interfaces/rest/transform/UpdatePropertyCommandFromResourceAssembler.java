@@ -5,7 +5,7 @@ import com.propiconnect.inmoshare.properties.interfaces.rest.resources.UpdatePro
 
 public class UpdatePropertyCommandFromResourceAssembler {
     public static UpdatePropertyCommand toCommandFromResource(Long id, UpdatePropertyResource resource) {
-        return new UpdatePropertyCommand(id, resource.city(), resource.type(), resource.address(), resource.description(), resource.propertyType(), resource.rentalType(), resource.image(), resource.initialPrice()
+        return new UpdatePropertyCommand(id,resource.ownerName(),resource.ownerId(), resource.city(), resource.type(), resource.address(), resource.description(), resource.propertyType(), resource.rentalType(), resource.image(), resource.initialPrice()
         );
     }
 }

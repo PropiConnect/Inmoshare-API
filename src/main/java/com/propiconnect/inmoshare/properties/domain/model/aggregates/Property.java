@@ -83,7 +83,9 @@ public class Property extends AuditableAbstractAggregateRoot<Property> {
         this.initialPrice=command.initialPrice();
     }
 
-    public Property updateInformation(String city, String type, String address, String description, String propertyType, String rentalType, String image, Double initialPrice) {
+    public Property updateInformation(Long ownerId, String ownerName, String city, String type, String address, String description, String propertyType, String rentalType, String image, Double initialPrice) {
+        this.ownerId = ownerId;
+        this.ownerName = ownerName;
         this.city = city;
         this.type = type;
         this.address = address;
